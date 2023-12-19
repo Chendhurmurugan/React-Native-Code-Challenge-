@@ -78,8 +78,8 @@ const TabNavigator = () => {
   return (
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home}  options={{ headerShown: false }} />
-        <Stack.Screen name="rocketDetails" component={RocketView} />
-        <Stack.Screen name="launchDetails" component={LaunchesView} />
+        <Stack.Screen name="RocketDetails" component={RocketView} />
+        <Stack.Screen name="LaunchDetails" component={LaunchesView} />
       </Stack.Navigator>
   );
 };

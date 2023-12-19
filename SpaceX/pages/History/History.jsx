@@ -6,13 +6,12 @@ import {
   ScrollView,
   Image,
   StyleSheet,
-  ImageBackground,
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import spaceXImg from '../../assets/spaceimage.jpg';
 import flickerIcon from '../../assets/flickerIcon.png';
 import twitterIcon from '../../assets/twitterIcon2.png';
+import spaceXmusk from '../../assets/spaceXmusk.png';
 import Youtube from '../../assets/utube.png';
 import {historyList} from '../../service/API/HistoryApiCall';
 
@@ -42,46 +41,40 @@ const History = () => {
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/spaceimage.jpg')}
-      style={styles.background}>
+    <ScrollView style={styles.historyContainer}>
       <View style={styles.header}>
-        <Image source={{spaceXImg}} style={styles.elonImage} />
+        <Image source={spaceXmusk} style={styles.elonImage} />
       </View>
 
-      <ScrollView>
-        <View style={styles.overview}>
-          <Text style={styles.summary}>{historyData.summary}</Text>
-        </View>
+      <View style={styles.overview}>
+        <Text style={styles.summary}>{historyData.summary}</Text>
+      </View>
 
-        <View style={styles.details}>
-          <Text style={styles.sectionTitle}>Details :-</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`Spacex Founder : ${historyData.founder}`}</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`Spacex Coo : ${historyData.coo}`}</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`Total Employees : ${historyData.employees}`}</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`CTO Propulsion :${historyData.cto_propulsion}`}</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`valuation :${historyData.valuation}`}</Text>
-          <Text
-            style={
-              styles.sectionTitle
-            }>{`Area : ${historyData?.headquarters?.state}`}</Text>
-        </View>
-      </ScrollView>
+      <View style={styles.details}>
+        <Text style={styles.sectionTitle}>Details :-</Text>
+        <Text
+          style={
+            styles.sectionTitle
+          }>{`Spacex Founder : ${historyData.founder}`}</Text>
+        <Text
+          style={styles.sectionTitle}>{`Spacex Coo : ${historyData.coo}`}</Text>
+        <Text
+          style={
+            styles.sectionTitle
+          }>{`Total Employees : ${historyData.employees}`}</Text>
+        <Text
+          style={
+            styles.sectionTitle
+          }>{`CTO Propulsion :${historyData.cto_propulsion}`}</Text>
+        <Text
+          style={
+            styles.sectionTitle
+          }>{`valuation :${historyData.valuation}`}</Text>
+        <Text
+          style={
+            styles.sectionTitle
+          }>{`Area : ${historyData?.headquarters?.state}`}</Text>
+      </View>
       {/* Socail Media */}
       <View style={styles.links}>
         <TouchableOpacity style={styles.wikipediaButton} onPress={openYouTube}>
@@ -94,7 +87,7 @@ const History = () => {
           <Image source={twitterIcon} style={styles.socailMediatwitterIcon} />
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </ScrollView>
   );
 };
 
@@ -103,6 +96,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 400,
     height: 800,
+  },
+  historyContainer: {
+    backgroundColor: 'black',
   },
   container: {
     flex: 1,
@@ -113,8 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   elonImage: {
-    // width:400,
-    height: 270,
+    width: 350,
+    height: 300,
   },
   companyName: {
     color: 'white',
@@ -134,15 +130,15 @@ const styles = StyleSheet.create({
   },
   details: {
     padding: 20,
+    paddingTop: 5,
   },
   sectionTitle: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   links: {
-    padding: 20,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',

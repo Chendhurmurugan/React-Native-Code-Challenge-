@@ -45,7 +45,7 @@ const Rockets = () => {
   };
 
   const handleCardPress = item => {
-    navigation.navigate('rocketDetails', {item});
+    navigation.navigate('RocketDetails', {item});
   };
 
   const renderCard = ({item}) => (

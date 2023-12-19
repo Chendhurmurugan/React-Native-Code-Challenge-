@@ -11,10 +11,12 @@ import Search from '../../Components/Search';
 import {launchList} from '../../service/API/LaunchesApiCall';
 import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
+import Loader from '../../Components/Loader';
 
 const Launches = () => {
   const navigation = useNavigation();
   const [launchSearchText, setLaunchSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [launchListData, setLaunchListData] = useState([]);
 
   useEffect(() => {
@@ -28,26 +30,25 @@ const Launches = () => {
       const fltrData = launchListData.filter(d =>
         d.name.toLowerCase().includes(launchSearchText.toLowerCase()),
       );
-      console.log(fltrData ,"fltrData");
       return fltrData;
     } else {
       return launchListData;
     }
   }, [launchSearchText, launchListData]);
-  console.log(handleLaunchListSearch, 'handleLaunchListSearch');
-  console.log(launchSearchText ,"launchSearchText");
 
   const handleLaunchList = async () => {
+    setIsLoading(true)
     const res = await launchList();
     if (res.length > 0) {
       setLaunchListData(res);
     } else {
       setLaunchListData([]);
     }
+    setIsLoading(false)
   };
 
   const handleCardPress = item => {
-    navigation.navigate('launchDetails', {item});
+    navigation.navigate('LaunchDetails', {item});
   };
 
   const renderCard = ({item}) => (
@@ -77,7 +78,8 @@ const Launches = () => {
         setSearchText={setLaunchSearchText}
         placeholderName={'Launches Name'}
       />
-      {launchListData.length > 0 ? (
+      {isLoading && <Loader />}
+      {handleLaunchListSearch.length > 0  ? (
         <FlatList
           data={handleLaunchListSearch}
           renderItem={renderCard}
@@ -85,7 +87,7 @@ const Launches = () => {
           numColumns={1}
           style={{flex: 1}}
         />
-      ) : (
+      ) : ( !isLoading  &&
         <View>
           <Text style={styles.nodata}>No data available</Text>
         </View>
